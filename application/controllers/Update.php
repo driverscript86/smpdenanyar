@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
 class Update extends CI_Controller
 {
     public function __construct()
@@ -886,37 +892,48 @@ class Update extends CI_Controller
         $web = $data['web'];
 
         $esen =  $this->db->get('email_sender')->row_array();
+        $mail = new PHPMailer(true);
+        //Server settings
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+        $mail->isSMTP();                                            // Send using SMTP
+        $mail->Host       = $esen['host'];                    // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+        $mail->Username   = $esen['email'];                     // SMTP username
+        $mail->Password   = $esen['password'];                               // SMTP password
+        // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+        $mail->Port       = $esen['port'];
+        // $config = [
+        //     'protocol'  => $esen['protocol'],
+        //     'smtp_host' => $esen['host'],
+        //     'smtp_user' => $esen['email'],
+        //     'smtp_pass' => $esen['password'],
+        //     'smtp_port' => $esen['port'],
+        //     'mailtype'  => 'html',
+        //     'charset'   => $esen['charset'],
+        //     'newline'   => "\r\n"
+        // ];
 
-        $config = [
-            'protocol'  => $esen['protocol'],
-            'smtp_host' => $esen['host'],
-            'smtp_user' => $esen['email'],
-            'smtp_pass' => $esen['password'],
-            'smtp_port' => $esen['port'],
-            'mailtype'  => 'html',
-            'charset'   => $esen['charset'],
-            'newline'   => "\r\n"
-        ];
 
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-        $this->email->set_header('Content-Type', 'text/html');
+        // $this->load->library('email', $config);
+        // $this->email->set_newline("\r\n");
+        // $this->email->set_header('Content-Type', 'text/html');
 
-        $this->email->from($esen['email'], $web['nama']);
-        $this->email->to($email);
+        $mail->setFrom($esen['email'], $web['nama']);
+        $mail->addReplyTo($email);
+        $mail->addAddress($email, $web['nama']);
 
         $data['link_web'] = base_url();
         $data['email'] = $email;
 
         $body = $this->load->view('email/ppdb', $data, TRUE);
+        $mail->isHTML(true);
+        $mail->Subject = ('Selamat Anda di Konfirmasi');
+        $mail->Body = ($body);
 
-        $this->email->subject('Selamat Anda di Konfirmasi');
-        $this->email->message($body);
-
-        if ($this->email->send()) {
+        if ($mail->send()) {
             return true;
         } else {
-            echo $this->email->print_debugger();
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             die;
         }
     }
