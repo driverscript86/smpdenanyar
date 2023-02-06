@@ -20,7 +20,7 @@
     <div class="footer-top">
       <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-5 col-md-12 footer-info">
+          <div class="col-lg-7 col-md-12 footer-info">
             <a href="<?= base_url('home'); ?>" class="logo d-flex align-items-center">
               <!-- <img src="assets/img/logo.png" alt=""> -->
               <span><?= $web['nama'] ?></span>
@@ -42,7 +42,7 @@
             </div>
           </div>
 
-          <div style="display:blok;" id="foter-hide" class="col-lg-2 col-6 footer-links">
+          <!-- <div style="display:blok;" id="foter-hide" class="col-lg-2 col-6 footer-links">
             <h4></h4>
             <ul>
               <li></li>
@@ -51,9 +51,9 @@
               <li></li>
               <li></li>
             </ul>
-          </div>
+          </div> -->
 
-          <div class="col-lg-2 col-6 footer-links">
+          <div class="col-lg-2 col-md-6 footer-links text-center text-md-start">
             <h4>Link Menu</h4>
             <ul>
               <li><i class="bi bi-chevron-right"></i> <a href="<?= base_url('home'); ?>">Home</a></li>
