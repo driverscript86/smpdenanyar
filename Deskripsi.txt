@@ -1,0 +1,85 @@
+WEB SEKOLAH PPDB 2022
+E-KONSELING CODEIGNITER 3 + BOOTSTRAP 4
+
+Fitur :
+Halaman Website
+- Home,halaman yang responsive.
+- Acara {Detail Acara)
+- Gallery (Detail)
+- About ,Visi Misi
+- Kontak
+- Form Pendaftaran
+- Login PPDB
+- Login Admin
+- Login Siswa
+- Dashboard PPDB
+
+Halaman Dashboard level admin 1
+- Monitoring data
+- Daftar Siswa (CRUD)
+- Daftar Pengurus (CRUD)
+- Pengelola PPDB
+- Pengelola Data Sekolah
+- - Konseling
+- - Perizinan
+- - Daftar Kelas
+- - Absensi
+- - Pelanggaran
+- Master Data
+- - Data Gedung
+- - Data Perizinan
+- - Data Kursi
+- - Data Pelanggaran
+- Kelola Acara
+- - Kategori Acara
+- Kelola Gallery
+- - Kategori Gallery
+- Daftar Kontak (balas kontak via email sender)
+- Settingan Website
+- - Tagline
+- - About
+- - Setting Website
+- - - Edit Link sosmed
+- - - Edit Logo / Gambar
+- - - Edit G-maps
+- - Setting Email Sender
+- - Setting Akun
+
+Halaman Dashboard level admin 2
+- Monitoring Sesuai role penempatan.
+- Daftar Siswa (CRUD)
+- Pengelola PPDB
+- Pengelola Data Sekolah
+- - Konseling
+- - Perizinan
+- - Daftar Kelas
+- - Absensi
+- - Pelanggaran
+- Master Data
+- - Data Gedung
+- - Data Perizinan
+- - Data Kursi
+- - Data Pelanggaran
+- Kelola Acara
+- - Kategori Acara
+- Kelola Gallery
+- - Kategori Gallery
+- Daftar Kontak (balas kontak via email sender)
+
+Halaman Dashboard Siswa
+- Dashboard
+- Daftar Konseling (Notif)
+- Perizinan (Notif Pending, proses, success, expired)
+- Setting Akun dan data diri.
+- Setting Password
+- Dll.
+
+Lainnya :
+- Level (Admin1, Admin2, Siswa, Member PPDB)
+- Basic Script Framework Codeigniter 3 & Bootstrap 4
+- Mudah Di Gunakan Dan Di Jalankan.
+- Settingan mudah langsung dari Halaman Admin.
+- Mudah di gunakan untuk Awam / Pembelajaran.
+
+WA : 085600899245
+https://wa.me/6285600899245

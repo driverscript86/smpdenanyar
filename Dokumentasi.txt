@@ -1,0 +1,32 @@
+INSTALASI
+
+1.	Extract File Project ke webserver 
+2.	buat database dengan nama Sekolah atau sesuaikan dengan project Anda
+3.	import file database di folder DB/sekolah.sql
+4.	setting database server di file /applications/config/database.php
+
+	$db['default'] = array(
+		'hostname' => 'localhost',
+		'username' => 'root',
+		'password' => '',
+		'database' => 'sekolah',
+
+	Sesuaikan dengan pengaturan server Anda.
+
+5. buka url di browser dengan alamat sesuai project Anda
+6. akses login admin : /auth/admin 
+   gunakan account default :
+	Admin 1
+	Email    : admin@gmail.com
+	Password : admin
+	
+	Admin 2 :
+	Email    : admin1@gmail.com
+	Password : admin
+	
+7. Silahkan ubah semua settingan konfigurasi yang ada di menu halaman Admin.
+
+
+
+								---- TERIMAKASIH ----
+
