@@ -7,58 +7,21 @@ namespace Composer\Autoload;
 class ComposerStaticInitd7e1ce140667bc0fc1c71e79da1f89dc
 {
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'P' => 
         array (
-            'Svg\\' => 4,
-            'Sabberworm\\CSS\\' => 15,
-        ),
-        'F' => 
-        array (
-            'FontLib\\' => 8,
-        ),
-        'D' => 
-        array (
-            'Dompdf\\' => 7,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Svg\\' => 
+        'PHPMailer\\PHPMailer\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
-        ),
-        'Sabberworm\\CSS\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
-        ),
-        'FontLib\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
-        ),
-        'Dompdf\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'o' => 
-        array (
-            'org\\bovigo\\vfs' => 
-            array (
-                0 => __DIR__ . '/..' . '/mikey179/vfsstream/src/main/php',
-            ),
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Dompdf\\Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
-        'HTML5_Data' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Data.php',
-        'HTML5_InputStream' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/InputStream.php',
-        'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',
-        'HTML5_Tokenizer' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Tokenizer.php',
-        'HTML5_TreeBuilder' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/TreeBuilder.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -66,7 +29,6 @@ class ComposerStaticInitd7e1ce140667bc0fc1c71e79da1f89dc
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitd7e1ce140667bc0fc1c71e79da1f89dc::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitd7e1ce140667bc0fc1c71e79da1f89dc::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitd7e1ce140667bc0fc1c71e79da1f89dc::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitd7e1ce140667bc0fc1c71e79da1f89dc::$classMap;
 
         }, null, ClassLoader::class);

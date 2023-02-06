@@ -2,6 +2,14 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 //load Spout Library
 //require_once APPPATH . 'third_party/Spout/Autoloader/autoload.php';
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
 
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Box\Spout\Common\Entity\Row;
@@ -2164,7 +2172,7 @@ class Admin extends CI_Controller
 
     // ---------------- SEND EMAIL SENDER ----------------- //
 
-    private function sendEmail($id, $email, $subjek, $pesan, $type)
+    public function sendEmail($id, $email, $subjek, $pesan, $type)
     {
         $data['user'] = $this->db->get_where('karyawan', ['email' => $this->session->userdata('email')])->row_array();
         $data['web'] =  $this->db->get('website')->row_array();
@@ -2173,24 +2181,35 @@ class Admin extends CI_Controller
         $web = $data['web'];
 
         $esen =  $this->db->get('email_sender')->row_array();
+        $mail = new PHPMailer(true);
+        //Server settings
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+        $mail->isSMTP();                                            // Send using SMTP
+        $mail->Host       = $esen['host'];                    // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+        $mail->Username   = $esen['email'];                     // SMTP username
+        $mail->Password   = $esen['password'];                               // SMTP password
+        // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+        $mail->Port       = $esen['port'];
+        // $config = [
+        //     'protocol'  => $esen['protocol'],
+        //     'smtp_host' => $esen['host'],
+        //     'smtp_user' => $esen['email'],
+        //     'smtp_pass' => $esen['password'],
+        //     'smtp_port' => $esen['port'],
+        //     'mailtype'  => 'html',
+        //     'charset'   => $esen['charset'],
+        //     'newline'   => "\r\n"
+        // ];
 
-        $config = [
-            'protocol'  => $esen['protocol'],
-            'smtp_host' => $esen['host'],
-            'smtp_user' => $esen['email'],
-            'smtp_pass' => $esen['password'],
-            'smtp_port' => $esen['port'],
-            'mailtype'  => 'html',
-            'charset'   => $esen['charset'],
-            'newline'   => "\r\n"
-        ];
 
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-        $this->email->set_header('Content-Type', 'text/html');
+        // $this->load->library('email', $config);
+        // $this->email->set_newline("\r\n");
+        // $this->email->set_header('Content-Type', 'text/html');
 
-        $this->email->from($esen['email'], $web['nama']);
-        $this->email->to($email);
+        $mail->setFrom($esen['email'], $web['nama']);
+        $mail->addReplyTo($email);
+        $mail->addAddress($email, $web['nama']);
 
         $data['link_web'] = base_url();
         $data['email'] = $email;
@@ -2198,19 +2217,19 @@ class Admin extends CI_Controller
 
         $body_test = $this->load->view('email/test', $data, TRUE);
         $body_balas = $this->load->view('email/balas', $data, TRUE);
-
+        $mail->isHTML(true);
         if ($type == 'test') {
-            $this->email->subject($subjek . ' - ' . $web['nama']);
-            $this->email->message($body_test);
+            $mail->Subject = ($subjek . ' - ' . $web['nama']);
+            $mail->Body($body_test);
         } else if ($type == 'balas') {
-            $this->email->subject($subjek . ' - ' . $web['nama']);
-            $this->email->message($body_balas);
+            $mail->Subject = ($subjek . ' - ' . $web['nama']);
+            $mail->Body = ($body_balas);
         }
 
-        if ($this->email->send()) {
+        if ($mail->send()) {
             return true;
         } else {
-            echo $this->email->print_debugger();
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             die;
         }
     }
